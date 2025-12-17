@@ -12,7 +12,11 @@ if (!getApps().length) {
       Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_KEY, 'base64').toString('utf-8')
     );
   } else {
-    serviceAccount = require('../../../../firebaseServiceAccountKey.json');
+    try {
+      serviceAccount = require('../../../../firebaseServiceAccountKey.json');
+    } catch (error) {
+      throw new Error('Firebase credentials not found. Please set FIREBASE_SERVICE_ACCOUNT_KEY environment variable.');
+    }
   }
   
   initializeApp({
@@ -83,7 +87,11 @@ export async function POST(request) {
         Buffer.from(process.env.GOOGLE_SERVICE_ACCOUNT_KEY, 'base64').toString('utf-8')
       );
     } else {
-      googleServiceAccount = require('../../../../serviceAccountKey.json');
+      try {
+        googleServiceAccount = require('../../../../serviceAccountKey.json');
+      } catch (error) {
+        throw new Error('Google credentials not found. Please set GOOGLE_SERVICE_ACCOUNT_KEY environment variable.');
+      }
     }
     
     const auth = new google.auth.GoogleAuth({
@@ -197,11 +205,11 @@ export async function POST(request) {
 
         for (const record of records) {
           const idNumber = record.data[3];
-          const existingRowIndex = existingRows.findIndex(row => row[3] === idNumber && row[1] === record.data[1]); // Match ID and Event ID
+          const existingRowIndex = existingRows.findIndex(row => row[3] === idNumber && row[1] === record.data[1]);
 
           if (existingRowIndex !== -1) {
             // Update existing row
-            const rowNumber = existingRowIndex + 2; // +2 because of header row and 0-index
+            const rowNumber = existingRowIndex + 2;
             updateRequests.push({
               range: `${sheetName}!A${rowNumber}:G${rowNumber}`,
               values: [record.data]
