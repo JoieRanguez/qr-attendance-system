@@ -96,7 +96,6 @@ export default function AttendanceScanner() {
   };
 
   const onScanError = (errorMessage) => {
-    // Ignore continuous scan errors
   };
 
   const handleBack = () => {
