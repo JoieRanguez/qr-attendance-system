@@ -52,7 +52,6 @@ export default function TimeOutScanner() {
     setStatus({ message: 'QR Code scanned! Processing time-out...', type: 'info' });
 
     try {
-      // Find the student's TIME-IN record
       const attendanceRef = collection(db, 'attendance');
       const q = query(
         attendanceRef,
@@ -74,8 +73,6 @@ export default function TimeOutScanner() {
         }, 3000);
         return;
       }
-
-      // Update the first matching record with time-out
       const recordDoc = querySnapshot.docs[0];
       await updateDoc(doc(db, 'attendance', recordDoc.id), {
         timeOut: serverTimestamp(),
@@ -105,7 +102,6 @@ export default function TimeOutScanner() {
   };
 
   const onScanError = (errorMessage) => {
-    // Ignore continuous scan errors
   };
 
   const handleBack = () => {
