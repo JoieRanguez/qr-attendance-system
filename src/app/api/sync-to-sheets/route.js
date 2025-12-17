@@ -65,13 +65,13 @@ export async function POST(request) {
       eventGroups[eventId].push({
         id: doc.id,
         data: [
-          data.timeIn?.toDate().toLocaleString() || 'N/A',
+          data.timeIn?.toDate().toLocaleString('en-US', { timeZone: 'Asia/Manila' }) || 'N/A',
           data.eventId || 'N/A',
           data.name || 'N/A',
           data.idNumber || 'N/A',
           data.course || 'N/A',
           data.status || 'TIME-IN',
-          data.timeOut?.toDate().toLocaleString() || 'Pending'
+          data.timeOut?.toDate().toLocaleString('en-US', { timeZone: 'Asia/Manila' }) || 'Pending'
         ]
       });
       
