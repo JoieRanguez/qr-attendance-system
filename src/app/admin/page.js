@@ -156,6 +156,7 @@ export default function AdminPage() {
               min-height: 100vh;
               margin: 0;
               font-family: Arial, sans-serif;
+              background: white;
             }
             .container {
               text-align: center;
@@ -224,7 +225,7 @@ export default function AdminPage() {
         <div className="container">
           <div className="card" style={{ maxWidth: '400px', margin: '2rem auto' }}>
             <h2>Authentication Required</h2>
-            <p style={{ marginBottom: '1.5rem', color: '#5f6368' }}>
+            <p style={{ marginBottom: '1.5rem', color: '#b0b0b0' }}>
               Please enter the admin password to continue
             </p>
 
@@ -257,7 +258,7 @@ export default function AdminPage() {
               <a 
                 href="/" 
                 style={{ 
-                  color: '#1a73e8', 
+                  color: '#8ab4f8', 
                   textDecoration: 'none',
                   fontSize: '0.875rem'
                 }}
@@ -292,14 +293,23 @@ export default function AdminPage() {
           <button 
             onClick={handleLogout}
             style={{
-              background: 'rgba(255,255,255,0.2)',
-              border: '1px solid rgba(255,255,255,0.3)',
-              color: 'white',
+              background: '#2a2a2a',
+              border: '1px solid #505050',
+              color: '#e8e8e8',
               padding: '0.5rem 1rem',
               borderRadius: '4px',
               cursor: 'pointer',
               fontSize: '0.875rem',
-              fontWeight: '500'
+              fontWeight: '500',
+              transition: 'all 0.2s'
+            }}
+            onMouseOver={(e) => {
+              e.target.style.background = '#3a3a3a';
+              e.target.style.borderColor = '#707070';
+            }}
+            onMouseOut={(e) => {
+              e.target.style.background = '#2a2a2a';
+              e.target.style.borderColor = '#505050';
             }}
           >
             🔒 Logout
@@ -358,12 +368,12 @@ export default function AdminPage() {
           {qrCode && (
             <div style={{ marginTop: '2rem', textAlign: 'center' }}>
               <div style={{ 
-                background: '#f8f9fa', 
+                background: '#1a1a1a', 
                 padding: '2rem', 
                 borderRadius: '8px',
-                border: '2px solid #dadce0'
+                border: '2px solid #505050'
               }}>
-                <h3 style={{ marginBottom: '1rem', color: '#202124' }}>
+                <h3 style={{ marginBottom: '1rem', color: '#ffffff' }}>
                   {qrCode.eventName}
                 </h3>
                 <img 
@@ -372,7 +382,7 @@ export default function AdminPage() {
                   style={{ 
                     maxWidth: '100%', 
                     height: 'auto',
-                    border: '1px solid #dadce0',
+                    border: '1px solid #505050',
                     borderRadius: '4px',
                     background: 'white',
                     padding: '1rem'
@@ -380,10 +390,10 @@ export default function AdminPage() {
                 />
                 <p style={{ 
                   marginTop: '1rem', 
-                  color: '#5f6368',
+                  color: '#b0b0b0',
                   fontSize: '0.875rem'
                 }}>
-                  Event ID: <strong>{qrCode.eventId}</strong>
+                  Event ID: <strong style={{ color: '#e8e8e8' }}>{qrCode.eventId}</strong>
                 </p>
               </div>
 
@@ -441,14 +451,14 @@ export default function AdminPage() {
 
           <div style={{ 
             fontSize: '0.75rem', 
-            color: '#5f6368',
+            color: '#b0b0b0',
             lineHeight: '1.4'
           }}>
             <p style={{ marginBottom: '0.5rem' }}>
-              <strong>⚡ Quick Sync:</strong> Only syncs new/updated records (faster)
+              <strong style={{ color: '#e8e8e8' }}>⚡ Quick Sync:</strong> Only syncs new/updated records (faster)
             </p>
             <p>
-              <strong>🔄 Full Sync:</strong> Re-syncs all records (use if data looks wrong)
+              <strong style={{ color: '#e8e8e8' }}>🔄 Full Sync:</strong> Re-syncs all records (use if data looks wrong)
             </p>
           </div>
         </div>
